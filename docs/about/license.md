@@ -1,0 +1,3 @@
+# License
+
+Nota: Si publicas tu código fuente en un repositorio público de GitHub, de acuerdo con los Términos de servicio, otros usuarios de GitHub tienen derecho a visualizar y bifurcar tu repositorio dentro del sitio de GitHub. Si ya has creado un repositorio público y no quieres que los usuarios sigan teniendo acceso a él, puedes volver privado tu repositorio. Cuando conviertes un repositorio público en un repositorio privado, las bifurcaciones existentes o las copias locales creadas por otros usuarios seguirán existiendo. Para obtener más información, consulta "Hacer que un repositorio público se vuelva privado".

@@ -1,0 +1,15 @@
+site_name: Medical Robotics and Biosignal Processing Laboratory  IPN-UPIBI
+theme: yeti
+
+
+nav:
+- Home: 'index.md'
+- Guide: 
+  - first: 'guide\example_1.md'
+  - second: 'guide\example_2.md'
+
+- About:
+    - "Directory": 'directory.md'
+    - 'License': 'about\license.md'
+    - 'Release Notes': 'about\release-notes.md'
+

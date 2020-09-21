@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>second - Medical Robotics and Biosignal Processing Laboratory  IPN-UPIBI</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/color-brewer.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Medical Robotics and Biosignal Processing Laboratory  IPN-UPIBI</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Guide <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../example_1/" class="dropdown-item">first</a>
+</li>
+                                    
+<li>
+    <a href="./" class="dropdown-item active">second</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../../directory/" class="dropdown-item">Directory</a>
+</li>
+                                    
+<li>
+    <a href="../../about/license/" class="dropdown-item">License</a>
+</li>
+                                    
+<li>
+    <a href="../../about/release-notes/" class="dropdown-item">Release Notes</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../example_1/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../../directory/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#example-2" class="nav-link">Example 2</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="example-2">Example 2</h1>
+<p>More code and stuff</p>
+<p>Since this is markdown we can add code snippets: </p>
+<pre><code class="Python">### ACTIVATION FUNCTIONS 
+
+def Sigmoid(Z):
+    s = 1/(1+np.exp(-Z))
+    return s
+
+def ReLU(Z):
+    return Z * (Z &gt; 0)
+
+# Derivatives of Activation Functions:
+
+def dSigmoid(A):
+    return A*(1-A)
+
+def dReLU(Z):
+    return 1 * (Z &gt; 0)
+
+
+### PARAMETER INITALIZATION
+def initialize_parameters_xavier(layer_dims):
+    &quot;&quot;&quot;
+    Arguments:
+    layer_dims -- python array (list) containing the dimensions of each layer in our network
+    Xavier = 1/sqrt(l-1)
+    &quot;&quot;&quot;
+    np.random.seed(3)
+    parameters = {}
+    L = len(layer_dims) # number of layers in the network
+
+    for l in range(1, L):
+        parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l-1]) / np.sqrt(layer_dims[l-1])
+        parameters['b' + str(l)] = np.zeros((layer_dims[l], 1))
+
+    return parameters
+
+def initialize_parameters_he(layer_dims):
+    &quot;&quot;&quot;
+    Arguments:
+    layer_dims -- python array (list) containing the dimensions of each layer in our network
+    Xavier = 1/sqrt(l-1)
+    &quot;&quot;&quot;
+    np.random.seed(3)
+    parameters = {}
+    L = len(layer_dims) # number of layers in the network
+
+    for l in range(1, L):                                                          
+        parameters['W' + str(l)] = np.random.randn(layer_dims[l], layer_dims[l-1])  *  np.sqrt(2 / layer_dims[l-1])
+        parameters['b' + str(l)] = np.zeros((layer_dims[l], 1))
+
+    return parameters
+
+### FORWARD PASS AND BACKPROPAGATION
+def forward_propagation_with_dropout(X, parameters, keep_prob ):
+    &quot;&quot;&quot;
+    Implements the forward propagation
+    &quot;&quot;&quot;
+    np.random.seed(1)
+    dropout ={}
+    forward = {}
+    forward[&quot;A&quot; + str(0)] = X # set A0 to X this will be very helpful for for loopimplementation
+
+    Num_of_parameters = len(parameters) // 2  # since we have W and b's  (but W and b share the same indexing for 1 layer)
+
+    for i in range(1,Num_of_parameters+1):
+        # LINEAR
+        forward[&quot;Z&quot;+str(i)] = np.dot(parameters[&quot;W&quot;+str(i)], forward[&quot;A&quot; + str(i-1)]) + parameters[&quot;b&quot;+str(i)]
+
+        # DROPOUT IS ONLY APPLIED TO HIDEN LAYERS 
+        if i != Num_of_parameters: # last layer has to have a SIGMOID activation 
+            forward[&quot;A&quot;+str(i)] = ReLU(forward[&quot;Z&quot;+str(i)])
+            dropout[&quot;D&quot;+str(i)]  = np.random.rand(*forward[&quot;A&quot;+str(i)].shape)
+            dropout[&quot;D&quot;+str(i)]  = ( dropout[&quot;D&quot;+str(i)]  &lt; keep_prob ).astype(int) 
+            forward[&quot;A&quot;+str(i)] = forward[&quot;A&quot;+str(i)]*dropout[&quot;D&quot;+str(i)]
+            forward[&quot;A&quot;+str(i)] = forward[&quot;A&quot;+str(i)]  / keep_prob  
+        else:
+            forward[&quot;A&quot;+str(i)] = Sigmoid(forward[&quot;Z&quot;+str(i)])
+
+    AL =  forward[&quot;A&quot;+str(i)]
+
+    return AL, forward, dropout
+
+
+def backward_propagation_with_dropout(X, Y,forward,parameters, keep_prob,dropout):
+    &quot;&quot;&quot;
+    Implement the backward propagation 
+    &quot;&quot;&quot;
+    m = X.shape[1]
+    gradients = {}
+    Num_of_parameters = len(parameters) // 2
+
+    AL = list(forward)[-1] #calls last element of dicitonari in this cas AL
+    gradients[&quot;dZ&quot;+str(Num_of_parameters)] =  forward[AL] - Y #Derivative respect to cost multiply by derivative of sig
+
+    for i in range(Num_of_parameters,0,-1):      
+
+        if i != Num_of_parameters: # we have already calcualted dZ for AL
+
+            gradients[&quot;dA&quot;+str(i)]  = np.dot(parameters[&quot;W&quot;+str(i+1)].T, gradients[&quot;dZ&quot;+str(i+1)])
+            gradients[&quot;dA&quot;+str(i)]  = gradients[&quot;dA&quot;+str(i)]*dropout[&quot;D&quot;+str(i)]
+            gradients[&quot;dA&quot;+str(i)]  =  gradients[&quot;dA&quot;+str(i)] /  keep_prob
+            gradients[&quot;dZ&quot;+str(i)]  = np.multiply(gradients[&quot;dA&quot;+str(i)],dReLU(forward[&quot;A&quot;+str(i)]))
+
+        gradients[&quot;dW&quot;+str(i)] = 1./m * np.dot(gradients[&quot;dZ&quot;+str(i)],forward[&quot;A&quot;+str(i-1)].T)
+        gradients[&quot;db&quot;+str(i)] = 1./m * np.sum(gradients[&quot;dZ&quot;+str(i)], axis=1, keepdims = True)
+
+    return gradients
+
+
+    ###COST
+    def compute_cost(AL, Y):
+    &quot;&quot;&quot;
+    Implement the cost function
+    &quot;&quot;&quot;
+
+    logprobs = np.multiply(-np.log(AL),Y) + np.multiply(-np.log(1 - AL), 1 - Y)
+    cost = np.sum(logprobs)
+
+    return cost
+
+    ###  ADAM OPTIMIZATION (MOMENTUM + )
+    def random_mini_batches(X, Y, mini_batch_size = 64, seed = 0):
+    &quot;&quot;&quot;
+    Creates a list of random minibatches from (X, Y)
+    Returns:
+    mini_batches -- list of synchronous (mini_batch_X, mini_batch_Y)
+    &quot;&quot;&quot;
+
+    np.random.seed(seed)            # To make your &quot;random&quot; minibatches the same as ours
+    m = X.shape[1]                  # number of training examples
+    mini_batches = []
+
+    # Step 1: Shuffle (X, Y)
+    permutation = list(np.random.permutation(m))
+    shuffled_X = X[:, permutation]
+    shuffled_Y = Y[:, permutation].reshape((1,m))
+
+    # Step 2: Partition (shuffled_X, shuffled_Y). Minus the end case.
+    num_complete_minibatches = math.floor(m/mini_batch_size) # number of mini batches of size mini_batch_size in your partitionning
+    for k in range(0, num_complete_minibatches):
+        ### START CODE HERE ### (approx. 2 lines)
+        mini_batch_X = shuffled_X[:, (k)*mini_batch_size : (k+1)* mini_batch_size]
+        mini_batch_Y = shuffled_Y[:, (k)*mini_batch_size : (k+1)* mini_batch_size]
+        ### END CODE HERE ###
+        mini_batch = (mini_batch_X, mini_batch_Y)
+        mini_batches.append(mini_batch)
+
+    # Handling the end case (last mini-batch &lt; mini_batch_size)
+    if m % mini_batch_size != 0:
+        ### START CODE HERE ### (approx. 2 lines)
+        mini_batch_X = shuffled_X[:,num_complete_minibatches * mini_batch_size:]
+        mini_batch_Y = shuffled_Y[:,num_complete_minibatches * mini_batch_size:]
+        ### END CODE HERE ###
+        mini_batch = (mini_batch_X, mini_batch_Y)
+        mini_batches.append(mini_batch)
+
+    return mini_batches
+
+def initialize_adam(parameters) :
+    &quot;&quot;&quot;
+    Initializes v and s as two python dictionaries 
+    &quot;&quot;&quot;
+
+    L = len(parameters) // 2 # number of layers in the neural networks
+    v = {}
+    s = {}
+
+    # Initialize v, s. Input: &quot;parameters&quot;. Outputs: &quot;v, s&quot;.
+    for l in range(L):
+
+        v[&quot;dW&quot; + str(l+1)] = np.zeros_like(parameters[&quot;W&quot; + str(l+1)])
+        v[&quot;db&quot; + str(l+1)] = np.zeros_like(parameters[&quot;b&quot; + str(l+1)])
+        s[&quot;dW&quot; + str(l+1)] = np.zeros_like(parameters[&quot;W&quot; + str(l+1)])
+        s[&quot;db&quot; + str(l+1)] = np.zeros_like(parameters[&quot;b&quot; + str(l+1)])
+
+    return v, s
+
+def update_parameters_with_adam(parameters, grads, v, s, t, learning_rate = 0.01,
+                                beta1 = 0.9, beta2 = 0.999,  epsilon = 1e-8):
+    &quot;&quot;&quot;
+    Update parameters using Adam
+    &quot;&quot;&quot;
+
+    L = len(parameters) // 2                 # number of layers in the neural networks
+    v_corrected = {}                         # Initializing first moment estimate, python dictionary
+    s_corrected = {}                         # Initializing second moment estimate, python dictionary
+
+    # Perform Adam update on all parameters
+    for l in range(L):
+        # Moving average of the gradients. Inputs: &quot;v, grads, beta1&quot;. Output: &quot;v&quot;.
+
+        v[&quot;dW&quot; + str(l + 1)] = beta1 * v[&quot;dW&quot; + str(l + 1)] + (1 - beta1) * grads['dW' + str(l + 1)]
+        v[&quot;db&quot; + str(l + 1)] = beta1 * v[&quot;db&quot; + str(l + 1)] + (1 - beta1) * grads['db' + str(l + 1)]
+
+        # Compute bias-corrected first moment estimate. Inputs: &quot;v, beta1, t&quot;. Output: &quot;v_corrected&quot;.
+        v_corrected[&quot;dW&quot; + str(l + 1)] = v[&quot;dW&quot; + str(l + 1)] / (1 - beta1**t)
+        v_corrected[&quot;db&quot; + str(l + 1)] = v[&quot;db&quot; + str(l + 1)] / (1 - beta1**t)
+
+        # Moving average of the squared gradients. Inputs: &quot;s, grads, beta2&quot;. Output: &quot;s&quot;.
+        s[&quot;dW&quot; + str(l + 1)] = beta2 * s[&quot;dW&quot; + str(l + 1)] + (1 - beta2) * grads['dW' + str(l + 1)]**2
+        s[&quot;db&quot; + str(l + 1)] = beta2 * s[&quot;db&quot; + str(l + 1)] + (1 - beta2) * grads['db' + str(l + 1)]**2
+
+        # Compute bias-corrected second raw moment estimate. Inputs: &quot;s, beta2, t&quot;. Output: &quot;s_corrected&quot;.
+        s_corrected[&quot;dW&quot; + str(l + 1)] = s[&quot;dW&quot; + str(l + 1)] / (1 - beta2**t)
+        s_corrected[&quot;db&quot; + str(l + 1)] = s[&quot;db&quot; + str(l + 1)] / (1 - beta2**t)
+
+        # Update parameters. Inputs: &quot;parameters, learning_rate, v_corrected, s_corrected, epsilon&quot;. Output: &quot;parameters&quot;.
+        parameters[&quot;W&quot; + str(l + 1)] = parameters[&quot;W&quot; + str(l + 1)] - learning_rate * v_corrected[&quot;dW&quot; + str(l + 1)] / (np.sqrt(s_corrected[&quot;dW&quot; + str(l + 1)]) + epsilon)
+        parameters[&quot;b&quot; + str(l + 1)] = parameters[&quot;b&quot; + str(l + 1)] - learning_rate * v_corrected[&quot;db&quot; + str(l + 1)] / (np.sqrt(s_corrected[&quot;db&quot; + str(l + 1)]) + epsilon)
+
+    return parameters, v, s
+
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
